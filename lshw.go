@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"os/exec"
 
 	"gopkg.in/xmlpath.v2"
@@ -307,6 +306,7 @@ func hardwareFromText(cmdOut []byte) (*Hardware, error) {
 
 }
 
+/*
 func printlshw() {
 	hw, err := GetHardware()
 	if err != nil {
@@ -315,3 +315,4 @@ func printlshw() {
 	hwJSON, _ := json.Marshal(hw)
 	println(string(hwJSON))
 }
+*/
