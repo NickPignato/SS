@@ -1,4 +1,4 @@
-package lshw
+package main
 
 import (
 	"bytes"
@@ -8,6 +8,7 @@ import (
 	"gopkg.in/xmlpath.v2"
 )
 
+//MemoryBank memorybank
 type MemoryBank struct {
 	Descr   string `json:"description"`
 	Size    string `json:"size"`
@@ -15,16 +16,19 @@ type MemoryBank struct {
 	Product string `json:"product"`
 }
 
+//Memory memory
 type Memory struct {
 	Descr string       `json:"description"`
 	Banks []MemoryBank `json:"banks"`
 }
 
+//CPUCache cpucache
 type CPUCache struct {
 	Descr string `json:"description"`
 	Size  string `json:"size"`
 }
 
+//CPU cpu
 type CPU struct {
 	Descr   string     `json:"description"`
 	Version string     `json:"version"`
@@ -33,12 +37,14 @@ type CPU struct {
 	Cache   []CPUCache `json:"cache"`
 }
 
+//DiskVolume diskvolume
 type DiskVolume struct {
 	Descr       string `json:"description"`
 	LogicalName string `json:"logical_name"`
 	Size        string `json:"size"`
 }
 
+//Disk disk
 type Disk struct {
 	Descr   string       `json:"description"`
 	Product string       `json:"product"`
@@ -47,6 +53,7 @@ type Disk struct {
 	Volumes []DiskVolume `json:"volumes"`
 }
 
+//Firmware fireware
 type Firmware struct {
 	Descr    string `json:"description"`
 	Vendor   string `json:"vendor"`
@@ -55,6 +62,7 @@ type Firmware struct {
 	Capacity string `json:"capacity"`
 }
 
+//Core core
 type Core struct {
 	Descr    string     `json:"description"`
 	Firmware []Firmware `json:"firmware"`
@@ -63,6 +71,7 @@ type Core struct {
 	Disks    []Disk     `json:"disk"`
 }
 
+//Hardware hardware
 type Hardware struct {
 	Descr   string `json:"description"`
 	Product string `json:"product"`
@@ -71,7 +80,7 @@ type Hardware struct {
 	Core    Core   `json:"core"`
 }
 
-// this uses lshw to get all server info
+//GetHardware this uses lshw to get all server info
 func GetHardware() (*Hardware, error) {
 	cmdOut, err := exec.Command("lshw", "-quiet", "-xml").Output()
 	if err != nil {
@@ -296,6 +305,9 @@ func hardwareFromText(cmdOut []byte) (*Hardware, error) {
 
 	return &hw, nil
 
+}
+
+func printlshw() {
 	hw, err := GetHardware()
 	if err != nil {
 		panic(err)
