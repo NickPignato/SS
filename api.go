@@ -84,7 +84,7 @@ func callralphAPI() {
 
 	//api request url curl -X GET https://<YOUR-RALPH-URL>/api/ -H 'Authorization: Token <YOUR-TOKEN>'
 
-	url := fmt.Sprintf("http://ralph.isprime.com/api/", apiURL)
+	url := fmt.Sprintf("YOUR_RALPH_URL", apiURL)
 
 	req, err := http.NewRequest("POST", url, nil)
 	if err != nil {
